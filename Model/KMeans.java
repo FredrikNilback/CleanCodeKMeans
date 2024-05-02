@@ -2,19 +2,20 @@ package Model;
 
 import java.util.Random;
 
+import View.ColorSelector;
+
 public class KMeans {
 
     DataPoint[] dataPoints;
     Centroid[] centroids;
 
-    public KMeans(DataPoint[] dataPoints, Centroid[] centroids, int maxIterations) {
+    public KMeans(DataPoint[] dataPoints, Centroid[] centroids) {
 
         this.dataPoints = dataPoints;
         this.centroids = centroids;
-        run(maxIterations);
     }
 
-    private String run(int maxIterations) {
+    public String run(int maxIterations) {
 
         for (int i = 0; i < maxIterations; i++) {
             
@@ -29,7 +30,11 @@ public class KMeans {
         return output;
     }
 
-    private void assignDataToCentroids() {
+    protected void assignDataToCentroids() {
+
+        for (int i = 0; i < centroids.length; i++) {
+            centroids[i].flushDataPoints();
+        }
 
         for(int i = 0; i < dataPoints.length; i++) {
 
@@ -38,8 +43,8 @@ public class KMeans {
             int dataX = dataPoints[i].getPositionX(), dataY = dataPoints[i].getPositionY();
             for(int j = 0; j < centroids.length; j++) {
                 
-                int centroidX = centroids[i].getPositionX(), centroidY = centroids[i].getPositionY();
-                double distance = Math.sqrt((dataX + centroidX) * (dataX + centroidX) + (dataY + centroidY) * (dataY + centroidY));
+                int centroidX = centroids[j].getPositionX(), centroidY = centroids[j].getPositionY();
+                double distance = Math.sqrt((dataX - centroidX) * (dataX - centroidX) + (dataY - centroidY) * (dataY - centroidY));
                 if(distance < minimumDistance) {
                     
                     minimumDistance = distance;
@@ -48,10 +53,11 @@ public class KMeans {
             }
 
             centroids[closestCentroidIndex].addDataPoint(dataPoints[i]);
+            dataPoints[i].setColor(centroids[closestCentroidIndex].getColor());
         }
     }
 
-    private void setNewCentroidPosition() {
+    protected void setNewCentroidPosition() {
 
         for(int i = 0; i < centroids.length; i++) {
 
@@ -60,7 +66,7 @@ public class KMeans {
             if(dataPointsInCentroid.length == 0) {
 
                 Random random = new Random();
-                centroids[i].moveCentroid(random.nextInt(100), random.nextInt(100));
+                centroids[i].moveCentroid(random.nextInt(100), random.nextInt(100), true);
                 continue;
             }
 
@@ -76,7 +82,7 @@ public class KMeans {
             double xAverage = (double) xSum / dataPointsInCentroid.length;
             double yAverage = (double) ySum / dataPointsInCentroid.length;
 
-            centroids[i].moveCentroid((int) Math.round(xAverage), (int) Math.round(yAverage));
+            centroids[i].moveCentroid((int) Math.round(xAverage), (int) Math.round(yAverage), false);
         }
     }
 
@@ -95,14 +101,23 @@ public class KMeans {
         String output = "";
         for (int i = 0; i < centroids.length; i++) {
 
-            output += "Centroid " + (i + 1) + ": ";
+            output += "Centroid " + (i + 1) + " (" + ColorSelector.getColorName(centroids[i].getColor()) + "):\n";
             DataPoint[] dataPointsInCentroid = centroids[i].getDataPoints();
             for (int j = 0; j < dataPointsInCentroid.length - 1; j++) {
-                output += "[" + dataPointsInCentroid[j].getPositionX() + ", " + dataPointsInCentroid[j].getPositionY() + "], ";
-            }
-            output += "[" + dataPointsInCentroid[dataPointsInCentroid.length - 1].getPositionX() + ", " + dataPointsInCentroid[dataPointsInCentroid.length - 1].getPositionY() + "]\n";
-        }
 
+                output += "[" + dataPointsInCentroid[j].getPositionX() + ", " + dataPointsInCentroid[j].getPositionY() + "], ";
+                if (j % 16 == 0 && j != 0) {
+                    output += "\n";
+                }
+            }
+            if (dataPointsInCentroid.length == 0) {
+                output += "No Datapoints\n";
+            }
+            else{
+                output += "[" + dataPointsInCentroid[dataPointsInCentroid.length - 1].getPositionX() + ", " + dataPointsInCentroid[dataPointsInCentroid.length - 1].getPositionY() + "]\n";
+            }
+        }
+        
         return output;
     }
     

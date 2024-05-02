@@ -8,10 +8,11 @@ public class Frame extends JFrame {
 
     public Frame(Panel panel) {
 
-        
-        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(panel);
         pack();
+        setLocationRelativeTo(null);
+        setResizable(false);
         setVisible(true);
     }
 }
