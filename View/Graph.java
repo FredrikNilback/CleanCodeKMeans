@@ -21,7 +21,7 @@ public class Graph extends JLabel {
 
     public void setPixelColor(int x, int y, int color) {
 
-        if (x < 0 || x >= width || y < 0 || y >= height) {
+        if(x < 0 || x >= width || y < 0 || y >= height) {
             return;
         }
         pixels[x][y] = color;
@@ -34,7 +34,7 @@ public class Graph extends JLabel {
 
     @Override
     protected void paintComponent(Graphics g) {
-
+        
         super.paintComponent(g);
         for(int x = 0; x < pixels.length; x++) {
             for(int y = 0; y < pixels[x].length; y++) {

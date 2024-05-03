@@ -51,17 +51,18 @@ public class Panel extends JPanel {
         final int buttonSize = 48;
         int column = 0;
         int row = 0;
-        for (int i = 1; i < arrayPickers.length + 1; i++) {
+        for(int i = 1; i < arrayPickers.length + 1; i++) {
+
             arrayPickers[i - 1] = new Button(buttonSize, buttonSize, column * 50 + 800, row * 50 + 170, i);
             column++;
-            if (column % 3 == 0) {
+            if(column % 3 == 0) {
+
                 row++;
                 column = 0;
             }
+
             add(arrayPickers[i - 1]);
-        }
-        
-        
+        }  
     }
 
     public Graph getGraph() {

@@ -5,6 +5,7 @@ public class Container {
     private DataPoint[] dataPoints;
     private Centroid[] centroids;
     private int maxIterations;
+    private IClustering clusteringMethod;
     private boolean elementsInPlace;
 
     public Container() {
@@ -13,11 +14,12 @@ public class Container {
 
     public String startKMeans() {
 
-        if (elementsInPlace) {
-            return new KMeans(dataPoints, centroids).run(maxIterations);   
+        if(elementsInPlace) {
+            clusteringMethod = new KMeans(dataPoints, centroids);
+            return clusteringMethod.run(maxIterations);
         }
         return new String("Need more info.");
-    }
+    }    
 
     public boolean getElementsInPlace() {
         return elementsInPlace;
@@ -52,6 +54,4 @@ public class Container {
             this.elementsInPlace = true;
         }
     }
-
-
 }

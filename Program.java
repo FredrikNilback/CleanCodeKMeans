@@ -8,8 +8,6 @@ public class Program {
 
         Panel panel = new Panel();
         new Frame(panel);
-        new MainController(panel);
-
-        
+        new MainController(panel); 
     }
 }

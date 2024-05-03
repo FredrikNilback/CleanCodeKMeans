@@ -16,6 +16,5 @@ public class Button extends JButton {
 
         setBounds(positionX, positionY, width, height);
         setText("" + number);
-
     }
 }

@@ -4,7 +4,7 @@ import java.util.Random;
 
 import View.ColorSelector;
 
-public class KMeans {
+public class KMeans implements IClustering {
 
     DataPoint[] dataPoints;
     Centroid[] centroids;
@@ -15,6 +15,7 @@ public class KMeans {
         this.centroids = centroids;
     }
 
+    @Override
     public String run(int maxIterations) {
 
         for (int i = 0; i < maxIterations; i++) {
@@ -30,7 +31,7 @@ public class KMeans {
         return output;
     }
 
-    protected void assignDataToCentroids() {
+    private void assignDataToCentroids() {
 
         for (int i = 0; i < centroids.length; i++) {
             centroids[i].flushDataPoints();
@@ -57,7 +58,7 @@ public class KMeans {
         }
     }
 
-    protected void setNewCentroidPosition() {
+    private void setNewCentroidPosition() {
 
         for(int i = 0; i < centroids.length; i++) {
 

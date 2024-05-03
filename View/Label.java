@@ -9,6 +9,5 @@ public class Label extends JLabel {
 
         setBounds(positionX, positionY, width, height);
         setIcon(new ImageIcon(imagePath));
-
     }
 }

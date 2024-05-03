@@ -41,5 +41,4 @@ public class Centroid extends Element {
     public DataPoint[] getDataPoints() {
         return dataPoints.toArray(new DataPoint[dataPoints.size()]);
     }
-
 }

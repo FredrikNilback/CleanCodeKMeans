@@ -34,24 +34,24 @@ public class MainController {
 
                     int maxIterations = panel.getMaxIterations();
                     setMaxIterations(maxIterations);
-
+                    
                     panel.getOutData().setText(container.startKMeans());
-                    paintAll();
+                    painter.paint();
                 } 
-                catch (Exception exception) {
+                catch(Exception exception) {
                     panel.getOutData().setText("Need more info.");
                 }
                 
             }
         });
 
-        for (int i = 0; i < panel.getArrayPickers().length; i++) {
+        for(int i = 0; i < panel.getArrayPickers().length; i++) {
 
             final int index = i + 1;
             panel.getArrayPickers()[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    
                     loadCSV(index);
                     painter.firstPaint();
                 }    
@@ -84,10 +84,4 @@ public class MainController {
 
         container.setMaxIterations(maxIterations);
     }
-
-    public void paintAll() {
-        painter.paint();
-    }
-
-
 }

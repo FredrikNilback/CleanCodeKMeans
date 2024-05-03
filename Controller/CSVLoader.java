@@ -25,7 +25,7 @@ public class CSVLoader {
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
             
             String line;
-            while ((line = bufferedReader.readLine()) != null) {
+            while((line = bufferedReader.readLine()) != null) {
                 
                 int posX = Integer.parseInt(line.split(",")[0]);
                 int posY = Integer.parseInt(line.split(",")[1]);
@@ -34,8 +34,8 @@ public class CSVLoader {
                 dataPoints.add(dataPoint);
             }
         } 
-        catch (Exception e) {
-            e.printStackTrace();
+        catch(Exception e) {
+            System.out.println("No array at that index"); 
         }
 
         container.setDataPoints(dataPoints.toArray(new DataPoint[dataPoints.size()]));

@@ -35,11 +35,13 @@ public class Painter {
     private void paintDataPoints() {
 
         DataPoint[] dataPoints = container.getDataPoints();
-        if (container.getDataPoints().length == 0) {
+        if(container.getDataPoints().length == 0) {
+
+            System.out.println("no data");
             return;
         }
         
-        for (int i = 0; i < dataPoints.length; i++) {
+        for(int i = 0; i < dataPoints.length; i++) {
 
             DataPoint dataPoint = dataPoints[i];
             int dataPointX = dataPoint.getPositionX();
@@ -68,19 +70,17 @@ public class Painter {
             for(int x = -5; x < 6; x++) {
                 for(int y = -5; y < 6; y++) {
                     
-                    if(partOfCircle(x, y)) {
-                        if(partOfCircumference(x, y)) {
-                            graph.setPixelColor(origoX + centroidX * scale + x, origoY - centroidY * scale + y, 1);
-                        }
-                        else {
-                            graph.setPixelColor(origoX + centroidX * scale + x, origoY - centroidY * scale + y, centroidColor);
-                        }
+                    if(partOfCircle(x, y) && partOfCircumference(x, y)) {
+                        graph.setPixelColor(origoX + centroidX * scale + x, origoY - centroidY * scale + y, 1);
+                    }
+                    else if (partOfCircle(x, y)) {
+                        graph.setPixelColor(origoX + centroidX * scale + x, origoY - centroidY * scale + y, centroidColor);
                     }
                 }
             }
         }
     }
-
+    
     private boolean partOfCircle(int x, int y) {
         return x * x + y * y <= 25;
     }
