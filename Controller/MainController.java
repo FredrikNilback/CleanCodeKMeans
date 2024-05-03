@@ -13,6 +13,7 @@ public class MainController {
     private Panel panel;
     private Container container = new Container();
     private Painter painter;
+    private boolean KMeans = true;
 
     public MainController(Panel panel) {
 
@@ -28,20 +29,68 @@ public class MainController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                try {
-                    int K = panel.getK();
-                    makeCentroids(K);
+                if (KMeans) {
+                    try {
+                        int K = panel.getK();
+                        makeCentroids(K);
+    
+                        int maxIterations = panel.getMaxIterations();
+                        container.setMaxIterations(maxIterations);
+                        
+                        panel.getOutData().setText(container.startClustering(KMeans));
+                        painter.paint(true);
+                    } 
+                    catch(Exception exception) {
+                        panel.getOutData().setText("Need more info.");
+                    }
+                }
+                else {
+                    try {
 
-                    int maxIterations = panel.getMaxIterations();
-                    setMaxIterations(maxIterations);
-                    
-                    panel.getOutData().setText(container.startKMeans());
-                    painter.paint();
-                } 
-                catch(Exception exception) {
-                    panel.getOutData().setText("Need more info.");
+                        int minimumPoints = panel.getK();
+                        container.setMinimumPoints(minimumPoints);
+    
+                        int epsilon = panel.getMaxIterations();
+                        container.setEpsilon(epsilon);
+                        
+                        panel.getOutData().setText(container.startClustering(KMeans));
+                        painter.paint(false);
+                    } 
+                    catch(Exception exception) {
+                        panel.getOutData().setText("Need more info.");
+                    }
                 }
                 
+                
+            }
+        });
+
+        panel.getKMeansButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                if (!panel.getKMeansButton().isSelected()) {
+                    panel.getKMeansButton().setSelected(true);
+                    return;
+                }
+                panel.getDBSCANButton().setSelected(false);
+                panel.getAxis().switchIcon(true);
+                KMeans = true;
+                
+            }
+        });
+
+        panel.getDBSCANButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                if (!panel.getDBSCANButton().isSelected()) {
+                    panel.getDBSCANButton().setSelected(true);
+                    return;
+                }
+                panel.getKMeansButton().setSelected(false);
+                panel.getAxis().switchIcon(false);
+                KMeans = false;
             }
         });
 
@@ -59,9 +108,9 @@ public class MainController {
         }
     }
 
-    public void loadCSV(int CSVNumber) {
+    private void loadCSV(int CSVNumber) {
 
-        new CSVLoader(CSVNumber, container);
+        new CSVLoader(CSVNumber, container, panel.getOutData());
     }
 
     private void makeCentroids(int K) { 
@@ -78,10 +127,5 @@ public class MainController {
         }
 
         container.setCentroids(centroids);
-    }
-
-    private void setMaxIterations(int maxIterations) {
-
-        container.setMaxIterations(maxIterations);
     }
 }

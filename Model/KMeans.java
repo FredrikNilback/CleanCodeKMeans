@@ -4,14 +4,13 @@ import java.util.Random;
 
 import View.ColorSelector;
 
-public class KMeans implements IClustering {
+public class KMeans extends SuperCluster implements IClustering {
 
-    DataPoint[] dataPoints;
-    Centroid[] centroids;
+    private Centroid[] centroids;
 
     public KMeans(DataPoint[] dataPoints, Centroid[] centroids) {
 
-        this.dataPoints = dataPoints;
+        super(dataPoints);
         this.centroids = centroids;
     }
 
@@ -97,21 +96,22 @@ public class KMeans implements IClustering {
         return false;
     }
 
-    private String makeString() {
+    @Override
+    protected String makeString() {
 
         String output = "";
-        for (int i = 0; i < centroids.length; i++) {
+        for(int i = 0; i < centroids.length; i++) {
 
             output += "Centroid " + (i + 1) + " (" + ColorSelector.getColorName(centroids[i].getColor()) + "):\n";
             DataPoint[] dataPointsInCentroid = centroids[i].getDataPoints();
-            for (int j = 0; j < dataPointsInCentroid.length - 1; j++) {
+            for(int j = 0; j < dataPointsInCentroid.length - 1; j++) {
 
                 output += "[" + dataPointsInCentroid[j].getPositionX() + ", " + dataPointsInCentroid[j].getPositionY() + "], ";
                 if (j % 16 == 0 && j != 0) {
                     output += "\n";
                 }
             }
-            if (dataPointsInCentroid.length == 0) {
+            if(dataPointsInCentroid.length == 0) {
                 output += "No Datapoints\n";
             }
             else{
@@ -121,5 +121,4 @@ public class KMeans implements IClustering {
         
         return output;
     }
-    
 }

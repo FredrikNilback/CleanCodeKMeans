@@ -11,6 +11,7 @@ public class Panel extends JPanel {
     private Graph graph = new Graph();
     private Button startButton;
     private Button[] arrayPickers = new Button[18];
+    private ToggleButton KMeansButton, DBSCANButton;
     private TextArea kInput, maxIterations, outData;
     private Label axis;
 
@@ -29,7 +30,7 @@ public class Panel extends JPanel {
 
     private void addAxis() {
 
-        axis = new Label(790, 542, 220, 0, "View/Images/Axis.png");
+        axis = new Label(790, 542, 220, 0, "View/Images/AxisKMeans.png", "View/Images/AxisDBSCAN.png");
         add(axis);
     }
 
@@ -47,6 +48,13 @@ public class Panel extends JPanel {
 
         startButton = new Button(128, 64, 811, 500, "View/Images/StartButton.png");
         add(startButton);
+
+        KMeansButton = new ToggleButton(128, 64, 50, 50, "View/Images/KMeansButton.png", "View/Images/KMeansButtonPressed.png");
+        KMeansButton.setSelected(true);
+        add(KMeansButton);
+
+        DBSCANButton = new ToggleButton(128, 64, 50, 150, "View/Images/DBSCANButton.png", "View/Images/DBSCANButtonPressed.png");
+        add(DBSCANButton);
 
         final int buttonSize = 48;
         int column = 0;
@@ -67,6 +75,9 @@ public class Panel extends JPanel {
 
     public Graph getGraph() {
         return graph;
+    }
+    public Label getAxis() {
+        return axis;
     }
 
     public Button getStartButton() {
@@ -89,5 +100,12 @@ public class Panel extends JPanel {
 
     public TextArea getOutData() {
         return outData;
+    }
+
+    public ToggleButton getDBSCANButton() {
+        return DBSCANButton;
+    }
+    public ToggleButton getKMeansButton() {
+        return KMeansButton;
     }
 }

@@ -9,7 +9,6 @@ public class Button extends JButton {
 
         setBounds(positionX, positionY, width, height);
         setIcon(new ImageIcon(imagePath));
-
     }
 
     public Button(int width, int height, int positionX, int positionY, int number) {

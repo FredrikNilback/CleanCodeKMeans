@@ -6,15 +6,18 @@ import java.util.ArrayList;
 
 import Model.Container;
 import Model.DataPoint;
+import View.TextArea;
 
 public class CSVLoader {
 
     private String path;
     private Container container;
+    private TextArea outData;
 
-    public CSVLoader(int CSVNumber, Container container) {
+    public CSVLoader(int CSVNumber, Container container, TextArea outData) {
 
         this.container = container;
+        this.outData = outData;
         path = "Controller/DataPointTables/DataPoints" + CSVNumber + ".csv";
         loadCSV();
     }
@@ -32,10 +35,11 @@ public class CSVLoader {
                 DataPoint dataPoint = new DataPoint(posX, posY);
 
                 dataPoints.add(dataPoint);
+                outData.setText("");
             }
         } 
         catch(Exception e) {
-            System.out.println("No array at that index"); 
+            outData.setText("No Array at that index!"); 
         }
 
         container.setDataPoints(dataPoints.toArray(new DataPoint[dataPoints.size()]));

@@ -19,11 +19,13 @@ public class Painter {
         this.container = container;
     }
 
-    public void paint() {
+    public void paint(boolean centroids) {
 
         graph.flush();
         paintDataPoints();
-        paintCentroids();
+        if (centroids) {
+            paintCentroids();  
+        }
     }
 
     public void firstPaint() {
@@ -36,8 +38,6 @@ public class Painter {
 
         DataPoint[] dataPoints = container.getDataPoints();
         if(container.getDataPoints().length == 0) {
-
-            System.out.println("no data");
             return;
         }
         
