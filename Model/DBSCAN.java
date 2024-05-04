@@ -174,7 +174,13 @@ public class DBSCAN extends SuperCluster implements IClustering {
         for (int i = 0; i < colorSeparation.size(); i++) {
 
             int color = colorSeparation.get(i).get(0).getColor();
-            output += ColorSelector.getColorName(color) + " Cluster:\n";
+            output += ColorSelector.getColorName(color);
+            if (color == 1) {
+                output += " (Outliers):\n";
+            }
+            else {
+                output += " Cluster:\n";
+            }
 
             for (int j = 0; j < colorSeparation.get(i).size() - 1; j++) {
 

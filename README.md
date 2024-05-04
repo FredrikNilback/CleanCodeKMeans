@@ -13,6 +13,9 @@ At the beginning, each centroid gets a random location within the dataset. The d
 After being assigned, the average position of each datapoint is calculated, and the centroids are moved there. 
 This process is then repeated until each centroid has reached a stable position, or the program has reached it's max iterations (specified by the user in this case).
 
+The weakness of this clustering algorithm is that it can be heavily affected by outliers, as it always assigns datapoints to a cluster no matter what. 
+This means that in datasets with a lot of outliers the clusters can be distorted.
+
 *DBSCAN
 DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is a clustering algorithm that does not initially know how many groups to divide the data in to.
 It works by having the user input an "epsilon" value aswell as a "minimum data points" value. 
@@ -23,6 +26,11 @@ If a datapoint is within the core reach, it is added to that core's cluster.
 This process repeats for each datapoint that is now part of the new cluster until the clusters all have stopped growing. 
 When they have stopped growing (meaning no new datapoints can be found within reach), the clustering stops.
 This means not every datapoint is necessarily added to a cluster, and these are branded as outliers. 
+
+The weakness of this type of clustering is that in datasets with varying density it can be very hard to fine tune the two parameters to successfully cluster everything.
+i.e If a dataset has 3 "true" clusters, where 2 of the 3 clusters have only 10 data points each, where as the 3rd has 50 datapoints, selecting a good minimum value and epsilon can be hard.
+as if the epsilon is too low, and the minumum value is too low, what we might end up with is 2 correct small clusters, and the big cluster gets incorrectly split in to 2 or 3 small clusters.
+On the flipside, if the minimum value is too high, we might en up with 0 core points in the small clusters, which will brand them as outliers. 
 
 
 
