@@ -37,7 +37,7 @@ public class Painter {
     private void paintDataPoints() {
 
         DataPoint[] dataPoints = container.getDataPoints();
-        if(container.getDataPoints().length == 0) {
+        if(dataPoints.length == 0) {
             return;
         }
         

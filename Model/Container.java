@@ -24,7 +24,7 @@ public class Container {
             clusteringMethod = new DBSCAN(dataPoints, minimumPoints);
             return clusteringMethod.run(epsilon);
         }
-        return new String("Need more info.");
+        return "Need more info.";
     }    
 
     public void setCentroids(Centroid[] centroids) {
@@ -34,6 +34,7 @@ public class Container {
     public Centroid[] getCentroids() {
         return centroids;
     }
+
     public void setDataPoints(DataPoint[] dataPoints) {
         this.dataPoints = dataPoints;
         checkKMeansElementsInPlace();
@@ -41,6 +42,7 @@ public class Container {
     public DataPoint[] getDataPoints() {
         return dataPoints;
     }
+
     public void setMaxIterations(int maxIterations) {
         this.maxIterations = maxIterations;
         checkKMeansElementsInPlace();

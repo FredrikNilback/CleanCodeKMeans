@@ -20,7 +20,6 @@ public class MainController {
         this.panel = panel;
         this.painter = new Painter(panel.getGraph(), container);
         addActionListeners();
-
     }
 
     private void addActionListeners() {
@@ -29,12 +28,12 @@ public class MainController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                if (KMeans) {
+                if(KMeans) {
                     try {
-                        int K = panel.getK();
+                        int K = Integer.parseInt(panel.getInput1());
                         makeCentroids(K);
     
-                        int maxIterations = panel.getMaxIterations();
+                        int maxIterations = Integer.parseInt(panel.getInput2());
                         container.setMaxIterations(maxIterations);
                         
                         panel.getOutData().setText(container.startClustering(KMeans));
@@ -47,10 +46,10 @@ public class MainController {
                 else {
                     try {
 
-                        int minimumPoints = panel.getK();
+                        int minimumPoints = Integer.parseInt(panel.getInput1());
                         container.setMinimumPoints(minimumPoints);
     
-                        int epsilon = panel.getMaxIterations();
+                        int epsilon = Integer.parseInt(panel.getInput2());
                         container.setEpsilon(epsilon);
                         
                         panel.getOutData().setText(container.startClustering(KMeans));
@@ -59,9 +58,7 @@ public class MainController {
                     catch(Exception exception) {
                         panel.getOutData().setText("Need more info.");
                     }
-                }
-                
-                
+                }  
             }
         });
 
@@ -69,14 +66,15 @@ public class MainController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                if (!panel.getKMeansButton().isSelected()) {
+                if(!panel.getKMeansButton().isSelected()) {
+
                     panel.getKMeansButton().setSelected(true);
                     return;
                 }
+
                 panel.getDBSCANButton().setSelected(false);
                 panel.getAxis().switchIcon(true);
                 KMeans = true;
-                
             }
         });
 
@@ -84,10 +82,12 @@ public class MainController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                if (!panel.getDBSCANButton().isSelected()) {
+                if(!panel.getDBSCANButton().isSelected()) {
+
                     panel.getDBSCANButton().setSelected(true);
                     return;
                 }
+
                 panel.getKMeansButton().setSelected(false);
                 panel.getAxis().switchIcon(false);
                 KMeans = false;

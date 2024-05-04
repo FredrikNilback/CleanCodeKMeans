@@ -12,7 +12,7 @@ public class Panel extends JPanel {
     private Button startButton;
     private Button[] arrayPickers = new Button[18];
     private ToggleButton KMeansButton, DBSCANButton;
-    private TextArea kInput, maxIterations, outData;
+    private TextArea input1, input2, outData;
     private Label axis;
 
     public Panel() {
@@ -36,24 +36,28 @@ public class Panel extends JPanel {
 
     private void addTextAreas() {
 
-        kInput = new TextArea(32, 32, 800, 100, true);
-        add(kInput);
-        maxIterations = new TextArea(32, 32, 918, 100, true);
-        add(maxIterations);
+        final int inputSize = 32;
+        input1 = new TextArea(inputSize, inputSize, 800, 100, true);
+        add(input1);
+        input2 = new TextArea(inputSize, inputSize, 918, 100, true);
+        add(input2);
         outData = new TextArea(800, 400, 100, 575, false);
         add(outData);
     }
 
     private void addButtons() {
 
-        startButton = new Button(128, 64, 811, 500, "View/Images/StartButton.png");
+        final int buttonWidth = 128;
+        final int buttonHeight = 64;
+
+        startButton = new Button(buttonWidth, buttonHeight, 811, 500, "View/Images/StartButton.png");
         add(startButton);
 
-        KMeansButton = new ToggleButton(128, 64, 50, 50, "View/Images/KMeansButton.png", "View/Images/KMeansButtonPressed.png");
+        KMeansButton = new ToggleButton(buttonWidth, buttonHeight, 50, 50, "View/Images/KMeansButton.png", "View/Images/KMeansButtonPressed.png");
         KMeansButton.setSelected(true);
         add(KMeansButton);
 
-        DBSCANButton = new ToggleButton(128, 64, 50, 150, "View/Images/DBSCANButton.png", "View/Images/DBSCANButtonPressed.png");
+        DBSCANButton = new ToggleButton(buttonWidth, buttonHeight, 50, 150, "View/Images/DBSCANButton.png", "View/Images/DBSCANButtonPressed.png");
         add(DBSCANButton);
 
         final int buttonSize = 48;
@@ -73,9 +77,12 @@ public class Panel extends JPanel {
         }  
     }
 
+    //Getters
+
     public Graph getGraph() {
         return graph;
     }
+
     public Label getAxis() {
         return axis;
     }
@@ -88,14 +95,11 @@ public class Panel extends JPanel {
         return arrayPickers;
     }
 
-    public int getK() {
-        int k = Integer.parseInt(kInput.getText());
-        return k;
+    public String getInput1() {
+        return input1.getText();
     }
-
-    public int getMaxIterations() {
-        int iterations = Integer.parseInt(maxIterations.getText());
-        return iterations;
+    public String getInput2() {
+        return input2.getText();
     }
 
     public TextArea getOutData() {
