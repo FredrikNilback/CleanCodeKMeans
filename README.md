@@ -6,7 +6,7 @@ aswell as making our own algorithm from scratch. I chose to make a K-Means, and 
 I purposefully chose to limit it to 2 dimension, and a data point range of 0-99 just because the main goal here is
 to be able to visualize the data. It would be trivial to allow for effectively infinite dimensions by just modifying the code a bit. 
 And the current code can actually process any data point range, including negative numbers, 
-but it's not within the bounds for the graph to actually showcase the resulting clusters. **
+but it's not within the bounds for the graph to actually showcase the resulting clusters.
 
 ## Clustering Algorithms:
 
