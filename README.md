@@ -1,6 +1,6 @@
 # CleanCode - Assignment 3.
 
-**This is an assignment to practice clean code, the SOLID principles and Design Patterns, 
+This is an assignment to practice clean code, the SOLID principles and Design Patterns, 
 aswell as making our own algorithm from scratch. I chose to make a K-Means, and a DBSCAN clustering algorithm.
 
 I purposefully chose to limit it to 2 dimension, and a data point range of 0-99 just because the main goal here is
